@@ -3,7 +3,7 @@ package service;
 import com.project.calculator.service.CalculatorService;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculatorServiceTest {
 
@@ -31,6 +31,20 @@ public class CalculatorServiceTest {
     void testSupportDifferentDelimiters() {
         assertEquals(3, calculatorService.add("//;\n1;2"));
         assertEquals(6, calculatorService.add("//|\n1|2|3"));
+    }
+
+    @Test
+    void testNegativeNumbersThrowException() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> calculatorService.add("1,-2,3,-4"));
+        assertTrue(exception.getMessage().contains("Negative numbers not allowed: [-2, -4]"));
+    }
+
+    @Test
+    void testMultipleNegativeNumbersInExceptionMessage() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> calculatorService.add("-1,-2,-3"));
+        assertTrue(exception.getMessage().contains("Negative numbers not allowed: [-1, -2, -3]"));
     }
 
 }

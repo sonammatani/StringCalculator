@@ -4,6 +4,9 @@ import ch.qos.logback.core.util.StringUtil;
 import com.project.calculator.constant.SpecialCharacterConstant;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CalculatorService {
 
@@ -20,13 +23,25 @@ public class CalculatorService {
         }
 
         numbers = numbers.replace(delimiter, SpecialCharacterConstant.DELIMETER);
+        numbers = numbers.replace(SpecialCharacterConstant.ESCAPE_LINE, SpecialCharacterConstant.DELIMETER);
         String[] tokens = numbers.split(SpecialCharacterConstant.DELIMETER);
 
+        List<Integer> negatives = new ArrayList<>();
         int sum = 0;
+
         for (String token : tokens) {
             int num = Integer.parseInt(token.trim());
+            if (num < 0) {
+                negatives.add(num);
+            } else {
                 sum += num;
+            }
         }
+
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("Negative numbers not allowed: " + negatives);
+        }
+
         return sum;
     }
 
