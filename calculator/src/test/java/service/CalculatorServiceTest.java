@@ -21,4 +21,10 @@ public class CalculatorServiceTest {
         assertEquals(6, result);
     }
 
+    @Test
+    public void testInputWithEscapeCharacter() {
+        int result = calculatorService.add("1\n2,3");
+        assertEquals(6, result);
+    }
+
 }

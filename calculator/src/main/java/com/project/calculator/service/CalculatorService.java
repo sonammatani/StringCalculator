@@ -12,6 +12,7 @@ public class CalculatorService {
             return 0;
         }
 
+        numbers = numbers.replace(SpecialCharacterConstant.ESCAPE_LINE, SpecialCharacterConstant.DELIMETER);
         String[] tokens = numbers.split(SpecialCharacterConstant.DELIMETER);
 
         int sum = 0;
