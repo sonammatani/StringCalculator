@@ -12,7 +12,14 @@ public class CalculatorService {
             return 0;
         }
 
-        numbers = numbers.replace(SpecialCharacterConstant.ESCAPE_LINE, SpecialCharacterConstant.DELIMETER);
+        String delimiter = SpecialCharacterConstant.DELIMETER;
+        if (numbers.startsWith(SpecialCharacterConstant.BACK_SLASH)) {
+            int delimiterIndex = numbers.indexOf(SpecialCharacterConstant.ESCAPE_LINE);
+            delimiter = numbers.substring(2, delimiterIndex);
+            numbers = numbers.substring(delimiterIndex + 1);
+        }
+
+        numbers = numbers.replace(delimiter, SpecialCharacterConstant.DELIMETER);
         String[] tokens = numbers.split(SpecialCharacterConstant.DELIMETER);
 
         int sum = 0;
@@ -22,4 +29,5 @@ public class CalculatorService {
         }
         return sum;
     }
+
 }

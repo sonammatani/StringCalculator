@@ -27,4 +27,10 @@ public class CalculatorServiceTest {
         assertEquals(6, result);
     }
 
+    @Test
+    void testSupportDifferentDelimiters() {
+        assertEquals(3, calculatorService.add("//;\n1;2"));
+        assertEquals(6, calculatorService.add("//|\n1|2|3"));
+    }
+
 }
