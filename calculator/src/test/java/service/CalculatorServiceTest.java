@@ -14,4 +14,11 @@ public class CalculatorServiceTest {
         int result = calculatorService.add("");
         assertEquals(0, result);
     }
+
+    @Test
+    public void testInputWithPositiveCommaSeparated() {
+        int result = calculatorService.add("1,2,3");
+        assertEquals(6, result);
+    }
+
 }

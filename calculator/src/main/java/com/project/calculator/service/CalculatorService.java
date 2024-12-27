@@ -1,6 +1,7 @@
 package com.project.calculator.service;
 
 import ch.qos.logback.core.util.StringUtil;
+import com.project.calculator.constant.SpecialCharacterConstant;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +11,14 @@ public class CalculatorService {
         if (StringUtil.isNullOrEmpty(numbers)) {
             return 0;
         }
-        //will update later
-        return 0;
+
+        String[] tokens = numbers.split(SpecialCharacterConstant.DELIMETER);
+
+        int sum = 0;
+        for (String token : tokens) {
+            int num = Integer.parseInt(token.trim());
+                sum += num;
+        }
+        return sum;
     }
 }
