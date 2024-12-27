@@ -1,4 +1,4 @@
-package com.project.calculator;
+package com.project.calculator.service;
 
 import ch.qos.logback.core.util.StringUtil;
 import org.springframework.stereotype.Service;
